@@ -1,0 +1,18 @@
+<table>
+    <tr>
+        <th>Авторы</th>
+        <th>Книг в базе</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    <tr *ngFor="let author of authors">
+        <td>{{author.firstName}} {{author.lastName}}</td>
+        <td>{{author.id}}</td>
+        <td>{{author.books.length}}</td>
+        <td><a [routerLink]="['/author', author.id]">Редактировать</a></td>
+        <td><a (click)="deleteAuthor(author.id)">Удалить</a></td>
+    </tr>
+</table>
+
