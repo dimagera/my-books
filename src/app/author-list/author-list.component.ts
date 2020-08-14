@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthorService} from 'src/app/shared/author.service';
+import { AuthorService } from 'src/app/shared/author.service';
 import { IAuthor } from '../shared/iauthor';
 
 @Component({
@@ -11,15 +11,16 @@ export class AuthorListComponent implements OnInit {
 
   authors: IAuthor[];
 
-  constructor(private myservice: AuthorService) { }
+  constructor(public myservice: AuthorService) { }
 
   ngOnInit(): void {
-    this.authors = this.myservice.getAuthors()
+    this.authors = Array.from(this.myservice.getAuthors())
   }
 
-
-  deleteAuthor(id: number){
-    this.myservice.deleteAuthor(+id);
-    this.authors = this.myservice.getAuthors()
+  deleteAuthor(id: number) {
+    if (confirm("подверждаете ли Вы удаление?")) {
+      this.myservice.deleteAuthor(+id);
+      this.authors = this.myservice.getAuthors()
+    }
   }
 }

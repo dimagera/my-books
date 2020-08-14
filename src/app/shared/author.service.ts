@@ -8,15 +8,15 @@ import { IBook } from './ibook';
 })
 export class AuthorService {
 
-  private FAKE_AUTHORS: IAuthor[] = [
+  public FAKE_AUTHORS: IAuthor[] = [
     {
       id: 1,
       firstName: "Тарас",
       lastName: "Шевченко",
       birthdate: new Date(1814, 3, 9),
       books: [
-        {name: 'kobzar', numberOfPages: 600, genre: 'роман'},
-        {name: 'стихи', numberOfPages: 200, genre: 'поема'}
+        { name: 'kobzar', numberOfPages: 600, genre: 'роман' },
+        { name: 'стихи', numberOfPages: 200, genre: 'поема' }
       ]
     },
     {
@@ -25,8 +25,8 @@ export class AuthorService {
       lastName: "Шевченко",
       birthdate: new Date(1814, 3, 9),
       books: [
-        {name: 'kobzar', numberOfPages: 600, genre: 'роман'},
-        {name: 'стихи', numberOfPages: 200, genre: 'поема'}
+        { name: 'kobzar', numberOfPages: 600, genre: 'роман' },
+        { name: 'стихи', numberOfPages: 200, genre: 'поема' }
       ]
     },
     {
@@ -35,8 +35,8 @@ export class AuthorService {
       lastName: "Шевченко",
       birthdate: new Date(1814, 3, 9),
       books: [
-        {name: 'kobzar', numberOfPages: 600, genre: 'роман'},
-        {name: 'стихи', numberOfPages: 200, genre: 'поема'}
+        { name: 'kobzar', numberOfPages: 600, genre: 'роман' },
+        { name: 'стихи', numberOfPages: 200, genre: 'поема' }
       ]
     },
     {
@@ -45,8 +45,8 @@ export class AuthorService {
       lastName: "Шевченко",
       birthdate: new Date(1814, 3, 9),
       books: [
-        {name: 'kobzar', numberOfPages: 600, genre: 'роман'},
-        {name: 'стихи', numberOfPages: 200, genre: 'поема'}
+        { name: 'kobzar', numberOfPages: 600, genre: 'роман' },
+        { name: 'стихи', numberOfPages: 200, genre: 'поема' }
       ]
     },
     {
@@ -55,8 +55,8 @@ export class AuthorService {
       lastName: "Шевченко",
       birthdate: new Date(1814, 3, 9),
       books: [
-        {name: 'kobzar', numberOfPages: 600, genre: 'роман'},
-        {name: 'стихи', numberOfPages: 200, genre: 'поема'}
+        { name: 'kobzar', numberOfPages: 600, genre: 'роман' },
+        { name: 'стихи', numberOfPages: 200, genre: 'поема' }
       ]
     }
   ];
@@ -71,20 +71,24 @@ export class AuthorService {
   constructor() { }
 
   getAuthors(): IAuthor[] {
-    return this.FAKE_AUTHORS; 
+    return this.FAKE_AUTHORS;
   };
 
-  deleteAuthor(id: number){
+  deleteAuthor(id: number) {
     let authorIndex;
-
-    this.FAKE_AUTHORS.find((element,index)=>{
-      if(element.id === id) {
+    let isExistingElement;
+    isExistingElement = this.FAKE_AUTHORS.find((element, index) => {
+      if (element.id === id) {
         authorIndex = index;
         return true;
       }
     })
 
-    this.FAKE_AUTHORS.splice(authorIndex, 1);
+    if (isExistingElement) {
+      this.FAKE_AUTHORS.splice(authorIndex, 1);
+    } else {
+      throw new Error("Элемент с данным ID не найден. Запросите на удаление существующий элемент.")
+    }
   }
 
   // getBooks(): IBook[] {
