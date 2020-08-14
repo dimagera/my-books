@@ -11,7 +11,9 @@ export class AuthorListComponent implements OnInit {
 
   authors: IAuthor[];
 
-  constructor(public myservice: AuthorService) { }
+  constructor(
+    public myservice: AuthorService
+  ) { }
 
   ngOnInit(): void {
     this.authors = Array.from(this.myservice.getAuthors())
@@ -21,6 +23,7 @@ export class AuthorListComponent implements OnInit {
     if (confirm("подверждаете ли Вы удаление?")) {
       this.myservice.deleteAuthor(+id);
       this.authors = this.myservice.getAuthors()
+     // this.authors = AuthorService.getAuthors()
     }
   }
 }

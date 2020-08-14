@@ -1,3 +1,33 @@
 <h1>Редактировать либо добавить нового автора</h1>
 
 <h2 *ngIf="currentAuthorId">ID автора -- {{currentAuthorId}}</h2>
+
+<form *ngIf="curentAuthor">
+    <p><input type="text" value="{{curentAuthor.firstName}}"></p>
+    <p><input type="text" value="{{curentAuthor.lastName}}"></p>
+    <p><input type="text" value="{{curentAuthor.parentName}}"></p>
+    <p><input type="text" value="{{curentAuthor.birthdate | date:'dd.MMMM.yyyy'}}"></p>
+
+    <!-- <p>{{curentAuthor.book}}</p> -->
+
+    <div class="author-book" *ngFor="let bookInAuthor of curentAuthor.books">
+        <p>Имя: {{bookInAuthor.name}}</p>
+        <p>Страниц: {{bookInAuthor.numberOfPages}}</p>
+        <p>Жанр: {{bookInAuthor.genre}}</p>
+        <p (click)="showChangeForm(form)">Редактировать</p>
+        <p (click)="deleteBook()">Удалить</p>
+        <form  class="book-form"
+            #form
+        > 
+            <input type="text" value="{{bookInAuthor.name}}">
+            <input type="text" value="{{bookInAuthor.numberOfPages}}">
+            <select name="" id="">
+                <option [selected]="bookInAuthor.genre==='поема'" value="поема">поема</option>
+                <option [selected]="bookInAuthor.genre==='роман'" value="роман">роман</option>
+                <option [selected]="bookInAuthor.genre==='драма'" value="драма">драма</option>
+                <option [selected]="bookInAuthor.genre==='ужасы'" value="ужасы">ужасы</option>
+            </select>
+            <input type="button" value="Изменить" (click)="changeBook(bookInAuthor)">
+        </form>
+    </div>
+</form>
